@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import axios from 'axios';
+import api from '../api'; // Aapki central api.js file ka exact path (agar kisi aur folder me ho toh check kar lena)
 
 const Register = () => {
   const navigate = useNavigate();
@@ -20,7 +20,8 @@ const Register = () => {
 
     try {
       const payload = { name, email, password, phone, role: 'admin' };
-      const res = await axios.post('http://localhost:5000/api/auth/register', payload);
+      // Hardcoded local URL ki jagah central 'api' use kiya hai
+      const res = await api.post('/api/auth/register', payload);
 
       if (res.data) {
         alert('Account Created Successfully! 🎉 Please log in now.');

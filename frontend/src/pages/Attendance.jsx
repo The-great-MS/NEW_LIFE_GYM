@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios'; // 👈 Fixed: Sirf normal axios import kiya hai ab
+import api from '../api'; // Aapki central api.js file ka exact path (agar path alag ho toh check kar lena)
 
 const Attendance = ({ fetchDashboardStats, isDark, theme }) => {
   const [members, setMembers] = useState([]);
@@ -8,8 +8,9 @@ const Attendance = ({ fetchDashboardStats, isDark, theme }) => {
 
   const loadData = async () => {
     try {
-      const membersRes = await axios.get('http://localhost:5000/api/members');
-      const logsRes = await axios.get('http://localhost:5000/api/attendance/today');
+      // Normal axios hatakar central api instance lagaya hai
+      const membersRes = await api.get('/api/members');
+      const logsRes = await api.get('/api/attendance/today');
       setMembers(membersRes.data);
       setTodayLogs(logsRes.data);
       setLoading(false);
@@ -25,7 +26,8 @@ const Attendance = ({ fetchDashboardStats, isDark, theme }) => {
 
   const handleCheckIn = async (memberId) => {
     try {
-      const res = await axios.post('http://localhost:5000/api/attendance/checkin', { memberId, status: 'Present' });
+      // Centralized API instance route handling
+      const res = await api.post('/api/attendance/checkin', { memberId, status: 'Present' });
       alert(res.data.message);
       loadData();
       if (fetchDashboardStats) fetchDashboardStats();

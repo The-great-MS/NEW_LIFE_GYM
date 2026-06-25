@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import api from '../api'; // Aapki central api.js file ka exact path (agar kisi aur folder me ho toh check kar lena)
 
 const Trainers = ({ isDark, theme }) => {
   const [trainersList, setTrainersList] = useState([]);
@@ -9,7 +9,8 @@ const Trainers = ({ isDark, theme }) => {
 
   const fetchTrainers = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/trainers');
+      // Axios hata kar central 'api' instance use kiya hai
+      const res = await api.get('/api/trainers');
       setTrainersList(res.data);
       setLoading(false);
     } catch (err) {
@@ -29,7 +30,8 @@ const Trainers = ({ isDark, theme }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:5000/api/trainers/add', form);
+      // Hardcoded local URL ki jagah relative route pass kiya hai
+      await api.post('/api/trainers/add', form);
       alert("Trainer Added Successfully! 🏋️");
       setForm({ name: '', specialization: '', phone: '', shift: 'Morning (6 AM - 12 PM)' });
       setShowAddForm(false);
@@ -42,7 +44,8 @@ const Trainers = ({ isDark, theme }) => {
   const handleDelete = async (id, name) => {
     if (window.confirm(`Remove ${name} from trainers list?`)) {
       try {
-        await axios.delete(`http://localhost:5000/api/trainers/${id}`);
+        // Dynamic central route endpoint
+        await api.delete(`/api/trainers/${id}`);
         fetchTrainers();
       } catch (err) {
         alert("Error deleting trainer");

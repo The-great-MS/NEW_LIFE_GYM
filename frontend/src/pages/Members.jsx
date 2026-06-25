@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import api from '../api'; // Aapki central api.js file ka exact path (agar path hierarchy alag ho toh check kar lena)
 
 const Members = ({ fetchDashboardStats, isDark, theme }) => {
   const [membersList, setMembersList] = useState([]);
@@ -7,7 +7,8 @@ const Members = ({ fetchDashboardStats, isDark, theme }) => {
 
   const fetchMembers = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/members');
+      // Axios hatakar central api instance lagaya hai
+      const res = await api.get('/api/members');
       setMembersList(res.data);
       setLoading(false);
     } catch (err) {
@@ -23,7 +24,8 @@ const Members = ({ fetchDashboardStats, isDark, theme }) => {
   const toggleFeeStatus = async (id, currentStatus, currentPlan) => {
     const nextStatus = currentStatus === 'Paid' ? 'Pending' : 'Paid';
     try {
-      await axios.put(`http://localhost:5000/api/members/fee-status/${id}`, {
+      // Centralized API dynamic link matching
+      await api.put(`/api/members/fee-status/${id}`, {
         feeStatus: nextStatus,
         planType: currentPlan || 'Monthly'
       });
@@ -36,7 +38,8 @@ const Members = ({ fetchDashboardStats, isDark, theme }) => {
 
   const handlePlanChange = async (id, nextPlan, currentStatus) => {
     try {
-      await axios.put(`http://localhost:5000/api/members/fee-status/${id}`, {
+      // Centralized API instance used here
+      await api.put(`/api/members/fee-status/${id}`, {
         feeStatus: currentStatus,
         planType: nextPlan
       });
@@ -50,7 +53,8 @@ const Members = ({ fetchDashboardStats, isDark, theme }) => {
   const handleDelete = async (id, name) => {
     if (window.confirm(`Are you sure you want to remove ${name} from the gym?`)) {
       try {
-        await axios.delete(`http://localhost:5000/api/members/${id}`);
+        // Centralized API route handling
+        await api.delete(`/api/members/${id}`);
         alert("Member removed successfully.");
         fetchMembers();
         if (fetchDashboardStats) fetchDashboardStats();
