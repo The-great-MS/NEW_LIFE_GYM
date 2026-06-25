@@ -1,0 +1,61 @@
+@import "tailwindcss";
+
+/* 🎨 FUTURE COLOR CUSTOMIZATION CENTER 🎨 */
+/* Agar future me gym ka theme badalna ho, toh bas niche diye gaye hex codes ko change kar dena! */
+:root {
+  --gym-background: #0b130e;  /* Ultra dark forest background */
+  --gym-card-bg: #121e16;     /* Dark card surface */
+  --gym-accent-green: #39b54a;/* Vibrant artificial grass green */
+  --gym-text-light: #e2e8f0;  /* Off-white text */
+  --gym-input-bg: #111827;    /* Dark gray input background */
+}
+/* 🌿 GREEN GYM ADVANCED SMOOTH DYNAMIC MULTI-THEME OVERRIDE */
+
+.transition-all {
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
+  transition-duration: 500ms !important;
+}
+
+/* Dynamic global smoothness injection across elements */
+div, sidebar, nav, button, input, select, table, tr, th, td, h1, h2, h3, p, span {
+  transition: background-color 500ms cubic-bezier(0.4, 0, 0.2, 1),
+              border-color 500ms cubic-bezier(0.4, 0, 0.2, 1),
+              color 450ms cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 500ms ease;
+}
+
+/* Smooth slight lift effect for dashboard counter grids */
+.grid > div:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px -5px rgba(57, 181, 74, 0.08);
+}
+/* 🌿 GREEN GYM RESPONSIVE & MULTI-THEME ULTRA-SMOOTH CONFIG */
+
+.transition-all {
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
+  transition-duration: 500ms !important;
+}
+
+/* Custom scrollbar handling for responsive overflow tables */
+.overflow-x-auto {
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+}
+
+/* Input structures and typography dynamic sizing adjustments */
+div, sidebar, nav, button, input, select, table, tr, th, td, h1, h2, h3, p, span {
+  transition: background-color 500ms cubic-bezier(0.4, 0, 0.2, 1),
+              border-color 500ms cubic-bezier(0.4, 0, 0.2, 1),
+              color 450ms cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 500ms ease;
+}
+
+/* Smooth subtle lift on wider screens */
+@media (min-width: 768px) {
+  .grid > div:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px -5px rgba(57, 181, 74, 0.08);
+  }
+}
