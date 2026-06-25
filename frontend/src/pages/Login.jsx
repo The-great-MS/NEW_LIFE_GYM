@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import axios from 'axios'; // 👈 Fixed: Sirf clean aur standard axios import kiya hai ab
+import api from '../api';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -17,7 +17,7 @@ const Login = () => {
 
     try {
       // 🚀 Fixed standard axios endpoint call
-      const res = await axios.post('http://localhost:5000/api/auth/login', { email, password });
+      const res = await api.post('/api/auth/login', { email, password });
 
       if (res.data && res.data.token) {
         localStorage.setItem('token', res.data.token);

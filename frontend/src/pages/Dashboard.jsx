@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import axios from 'axios';
+import api from '../api'; // 👈 Central Dynamic API Connection Link Kiya
 import { gymTheme } from '../theme';
 import Members from './Members';
 import Trainers from './Trainers';
@@ -25,10 +25,11 @@ const Dashboard = () => {
 
   const fetchDashboardStats = async () => {
     try {
-      const statsRes = await axios.get('http://localhost:5000/api/stats');
+      // ⚡ api instance use kiya bina localhost hardcode kiye
+      const statsRes = await api.get('/api/stats');
       setLiveStats(statsRes.data);
 
-      const logsRes = await axios.get('http://localhost:5000/api/attendance/today');
+      const logsRes = await api.get('/api/attendance/today');
       setRecentLogs(logsRes.data);
     } catch (err) {
       console.error("Error fetching dashboard requirements:", err);
@@ -59,7 +60,8 @@ const Dashboard = () => {
     e.preventDefault();
     setFormError('');
     try {
-      await axios.post('http://localhost:5000/api/auth/register', { ...memberForm, role: 'member' });
+      // ⚡ Yahan bhi api instance dynamic chalega
+      await api.post('/api/auth/register', { ...memberForm, role: 'member' });
       alert('New Member Added Successfully to Database! 🎉');
       setIsModalOpen(false);
       setMemberForm({ name: '', email: '', password: '', phone: '' });
@@ -78,7 +80,7 @@ const Dashboard = () => {
 
   const handleTabClick = (tabName) => {
     setActiveTab(tabName);
-    setIsSidebarOpen(false); // Close responsive drawers on mobile select
+    setIsSidebarOpen(false);
     if (tabName === 'dashboard') fetchDashboardStats();
   };
 
@@ -89,7 +91,7 @@ const Dashboard = () => {
       <div className={`md:hidden w-full p-4 flex justify-between items-center ${theme.bgCard} border-b ${isDark ? 'border-gray-800' : 'border-gray-300'} z-50 sticky top-0`}>
         <div className="flex items-center gap-2">
           <div className="w-7 h-7 rounded bg-[#39b54a] flex items-center justify-center font-bold text-white text-sm">G</div>
-          <h1 className={`text-md font-black tracking-wider ${theme.textInverse}`}>NEW LIFE<span className={`${theme.textPrimary}`}>GYM</span></h1>
+          <h1 className={`text-md font-black tracking-wider ${theme.textInverse}`}>GREEN<span className={`${theme.textPrimary}`}>GYM</span></h1>
         </div>
         <button
           onClick={() => setIsSidebarOpen(!isSidebarOpen)}
@@ -99,7 +101,7 @@ const Dashboard = () => {
         </button>
       </div>
 
-      {/* 🟢 SIDEBAR (DESKTOP MODAL + MOBILE SLIDING DRAWER) */}
+      {/* 🟢 SIDEBAR */}
       <div className={`
         fixed inset-y-0 left-0 z-40 w-64 ${theme.bgCard} border-r ${isDark ? 'border-gray-800' : 'border-gray-300'} p-6 shadow-xl flex flex-col justify-between
         transform transition-transform duration-500 ease-in-out md:translate-x-0 md:static md:h-screen
@@ -107,8 +109,8 @@ const Dashboard = () => {
       `}>
         <div>
           <div className="hidden md:flex items-center gap-3 mb-10">
-            <div className="w-8 h-8 rounded-lg bg-[#39b54a] flex items-center justify-center font-bold text-white">NEW</div>
-            <h1 className={`text-xl font-bold tracking-wider ${theme.textInverse}`}>LIFE<span className={`${theme.textPrimary}`}>GYM</span></h1>
+            <div className="w-8 h-8 rounded-lg bg-[#39b54a] flex items-center justify-center font-bold text-white">G</div>
+            <h1 className={`text-xl font-bold tracking-wider ${theme.textInverse}`}>GREEN<span className={`${theme.textPrimary}`}>GYM</span></h1>
           </div>
           <nav className="space-y-2 mt-14 md:mt-0">
             <button onClick={() => handleTabClick('dashboard')} className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left transition-all duration-300 cursor-pointer ${activeTab === 'dashboard' ? `bg-green-600/20 ${theme.textPrimary} font-bold` : `${isDark ? 'text-gray-400 hover:bg-gray-800' : 'text-gray-700 hover:bg-gray-200'}`}`}>📊 Dashboard</button>
@@ -120,13 +122,13 @@ const Dashboard = () => {
         <button onClick={handleLogout} className="w-full py-3 rounded-xl border border-red-500/20 text-red-400 hover:bg-red-500/10 font-medium transition-all cursor-pointer">🚪 Log Out</button>
       </div>
 
-      {/* 📱 MOBILE OVERLAY BACKDROP */}
+      {/* 📱 MOBILE OVERLAY */}
       {isSidebarOpen && <div onClick={() => setIsSidebarOpen(false)} className="fixed inset-0 bg-black/40 backdrop-blur-xs z-30 md:hidden"></div>}
 
       {/* 🟢 MAIN WORKSPACE AREA */}
       <div className="flex-1 p-4 md:p-8 overflow-y-auto flex flex-col justify-between transition-all duration-500 ease-in-out md:h-screen">
         <div>
-          {/* TOP HEADER HEADER VIEW */}
+          {/* TOP HEADER */}
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 md:mb-8">
             <div>
               <h2 className={`text-2xl md:text-3xl font-bold ${theme.textInverse} transition-colors duration-500`}>Welcome, {adminName}!</h2>
@@ -143,7 +145,6 @@ const Dashboard = () => {
             </div>
           </div>
 
-          {/* RENDERING BLOCKS GRID CONTROLS */}
           {activeTab === 'dashboard' ? (
             <>
               {/* RESPONSIVE GRID BOX */}
@@ -160,7 +161,7 @@ const Dashboard = () => {
                 ))}
               </div>
 
-              {/* RECENT CHECKINS AND LOGS FOR APP */}
+              {/* RECENT CHECKINS */}
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
                 <div className={`p-5 md:p-6 rounded-2xl ${theme.bgCard} border ${isDark ? 'border-gray-800' : 'border-gray-300'} flex flex-col lg:col-span-2 shadow-sm transition-all duration-500`}>
                   <h3 className={`text-base md:text-lg font-bold ${theme.textInverse} mb-4`}>Recent Active Check-ins</h3>
@@ -204,19 +205,19 @@ const Dashboard = () => {
           )}
         </div>
 
-        {/* 🟢 RESPONSIVE STRUCTURAL FOOTER */}
+        {/* 🟢 FOOTER */}
         <footer className={`mt-auto pt-4 border-t ${isDark ? 'border-gray-900' : 'border-gray-200'} flex flex-col sm:flex-row justify-between items-center gap-3 text-[10px] md:text-xs font-semibold text-gray-500`}>
           <div className="flex items-center gap-1.5">
             <span className="w-1.5 h-1.5 rounded-full bg-[#39b54a]"></span>
-            <span className={isDark ? 'text-gray-500' : 'text-gray-600'}>MERN Stack Project</span>
+            <span className={isDark ? 'text-gray-500' : 'text-gray-600'}>Major Academic ERP Core Project</span>
           </div>
           <div className={`text-center sm:text-right ${isDark ? 'text-gray-500' : 'text-gray-700'}`}>
-            Engineered by <span className={`${theme.textPrimary} font-black`}>Mohd Suhail</span> <span className="mx-1 text-gray-400">|</span> CSE 2026
+            Engineered by <span className={`${theme.textPrimary} font-black`}>Mohd. Suhail</span> <span className="mx-1 text-gray-400">|</span> CSE 2026
           </div>
         </footer>
       </div>
 
-      {/* 🟢 REGISTER ATHELETE MODAL BOX */}
+      {/* 🟢 MODAL */}
       {isModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm px-4">
           <div className={`w-full max-w-md p-6 md:p-8 rounded-2xl ${theme.bgCard} border ${theme.borderAccent} shadow-2xl relative transition-all duration-500`}>
