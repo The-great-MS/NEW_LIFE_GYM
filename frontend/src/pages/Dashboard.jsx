@@ -90,8 +90,8 @@ const Dashboard = () => {
       {/* 📱 MOBILE TOP FLOATING NAVBAR */}
       <div className={`md:hidden w-full p-4 flex justify-between items-center ${theme.bgCard} border-b ${isDark ? 'border-gray-800' : 'border-gray-300'} z-50 sticky top-0`}>
         <div className="flex items-center gap-2">
-          <div className="w-7 h-7 rounded bg-[#39b54a] flex items-center justify-center font-bold text-white text-sm">G</div>
-          <h1 className={`text-md font-black tracking-wider ${theme.textInverse}`}>GREEN<span className={`${theme.textPrimary}`}>GYM</span></h1>
+          <div className="w-7 h-7 rounded bg-[#39b54a] flex items-center justify-center font-bold text-white text-sm">NEW</div>
+          <h1 className={`text-md font-black tracking-wider ${theme.textInverse}`}>LIFE<span className={`${theme.textPrimary}`}>GYM</span></h1>
         </div>
         <button
           onClick={() => setIsSidebarOpen(!isSidebarOpen)}
@@ -109,8 +109,8 @@ const Dashboard = () => {
       `}>
         <div>
           <div className="hidden md:flex items-center gap-3 mb-10">
-            <div className="w-8 h-8 rounded-lg bg-[#39b54a] flex items-center justify-center font-bold text-white">G</div>
-            <h1 className={`text-xl font-bold tracking-wider ${theme.textInverse}`}>GREEN<span className={`${theme.textPrimary}`}>GYM</span></h1>
+            <div className="w-8 h-8 rounded-lg bg-[#39b54a] flex items-center justify-center font-bold text-white">NEW</div>
+            <h1 className={`text-xl font-bold tracking-wider ${theme.textInverse}`}>LIFE<span className={`${theme.textPrimary}`}>GYM</span></h1>
           </div>
           <nav className="space-y-2 mt-14 md:mt-0">
             <button onClick={() => handleTabClick('dashboard')} className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left transition-all duration-300 cursor-pointer ${activeTab === 'dashboard' ? `bg-green-600/20 ${theme.textPrimary} font-bold` : `${isDark ? 'text-gray-400 hover:bg-gray-800' : 'text-gray-700 hover:bg-gray-200'}`}`}>📊 Dashboard</button>
@@ -132,7 +132,7 @@ const Dashboard = () => {
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 md:mb-8">
             <div>
               <h2 className={`text-2xl md:text-3xl font-bold ${theme.textInverse} transition-colors duration-500`}>Welcome, {adminName}!</h2>
-              <p className={`${isDark ? 'text-gray-400' : 'text-gray-600'} text-xs md:text-sm mt-0.5 font-medium transition-colors duration-500`}>Here is what's happening at your turf today.</p>
+              <p className={`${isDark ? 'text-gray-400' : 'text-gray-600'} text-xs md:text-sm mt-0.5 font-medium transition-colors duration-500`}>Here is what's happening today!</p>
             </div>
 
             <div>
@@ -209,10 +209,10 @@ const Dashboard = () => {
         <footer className={`mt-auto pt-4 border-t ${isDark ? 'border-gray-900' : 'border-gray-200'} flex flex-col sm:flex-row justify-between items-center gap-3 text-[10px] md:text-xs font-semibold text-gray-500`}>
           <div className="flex items-center gap-1.5">
             <span className="w-1.5 h-1.5 rounded-full bg-[#39b54a]"></span>
-            <span className={isDark ? 'text-gray-500' : 'text-gray-600'}>Major Academic ERP Core Project</span>
+            <span className={isDark ? 'text-gray-500' : 'text-gray-600'}>MERN Project</span>
           </div>
           <div className={`text-center sm:text-right ${isDark ? 'text-gray-500' : 'text-gray-700'}`}>
-            Engineered by <span className={`${theme.textPrimary} font-black`}>Mohd. Suhail</span> <span className="mx-1 text-gray-400">|</span> CSE 2026
+            Engineered by <span className={`${theme.textPrimary} font-black`}>Mohd Suhail</span> <span className="mx-1 text-gray-400">|</span> CSE 2026
           </div>
         </footer>
       </div>
