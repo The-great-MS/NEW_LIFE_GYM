@@ -43,13 +43,13 @@ const Login = () => {
 
       <div className={`w-full max-w-md p-8 rounded-2xl border transition-all shadow-2xl ${isDark ? 'bg-[#121e16] border-gray-800' : 'bg-white border-gray-300'}`}>
         <div className="flex items-center justify-center gap-2 mb-6">
-          <div className="w-8 h-8 rounded-lg bg-[#39b54a] flex items-center justify-center font-bold text-white">G</div>
-          <h1 className={`text-2xl font-black tracking-wider ${isDark ? 'text-white' : 'text-gray-900'}`}>GREEN<span className={isDark ? 'text-[#39b54a]' : 'text-[#1e7e2c]'}>GYM</span></h1>
+          <div className="w-8 h-8 rounded-lg bg-[#39b54a] flex items-center justify-center font-bold text-white">NEW</div>
+          <h1 className={`text-2xl font-black tracking-wider ${isDark ? 'text-white' : 'text-gray-900'}`}>LIFE<span className={isDark ? 'text-[#39b54a]' : 'text-[#1e7e2c]'}>GYM</span></h1>
         </div>
 
         <div className="text-center mb-6">
           <h2 className={`text-2xl font-black ${isDark ? 'text-white' : 'text-gray-900'}`}>Welcome Back</h2>
-          <p className={`text-xs font-medium mt-1 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>Enter your credentials to manage your gym turf core.</p>
+          <p className={`text-xs font-medium mt-1 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>Enter your credentials to manage your gym data.</p>
         </div>
 
         {error && <div className="p-3 mb-4 text-xs font-bold text-red-500 bg-red-500/10 border border-red-500/20 rounded-xl text-center">⚠️ {error}</div>}
@@ -69,7 +69,7 @@ const Login = () => {
         </form>
 
         <div className="mt-6 text-center">
-          <p className={`text-xs font-medium ${isDark ? 'text-gray-500' : 'text-gray-600'}`}>Don't have an admin account? <Link to="/register" className={`font-bold underline ${isDark ? 'text-[#39b54a]' : 'text-[#1e7e2c]'}`}>Register Turf Now</Link></p>
+          <p className={`text-xs font-medium ${isDark ? 'text-gray-500' : 'text-gray-600'}`}>Don't have an admin account? <Link to="/register" className={`font-bold underline ${isDark ? 'text-[#39b54a]' : 'text-[#1e7e2c]'}`}>Register Now</Link></p>
         </div>
       </div>
     </div>

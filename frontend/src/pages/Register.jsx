@@ -44,8 +44,8 @@ const Register = () => {
 
       <div className={`w-full max-w-md p-8 rounded-2xl border transition-all shadow-2xl ${isDark ? 'bg-[#121e16] border-gray-800' : 'bg-white border-gray-300'}`}>
         <div className="flex items-center justify-center gap-2 mb-4">
-          <div className="w-8 h-8 rounded-lg bg-[#39b54a] flex items-center justify-center font-bold text-white">G</div>
-          <h1 className={`text-2xl font-black tracking-wider ${isDark ? 'text-white' : 'text-gray-900'}`}>GREEN<span className={isDark ? 'text-[#39b54a]' : 'text-[#1e7e2c]'}>GYM</span></h1>
+          <div className="w-8 h-8 rounded-lg bg-[#39b54a] flex items-center justify-center font-bold text-white">NEW</div>
+          <h1 className={`text-2xl font-black tracking-wider ${isDark ? 'text-white' : 'text-gray-900'}`}>LIFE<span className={isDark ? 'text-[#39b54a]' : 'text-[#1e7e2c]'}>GYM</span></h1>
         </div>
 
         <div className="text-center mb-6">
